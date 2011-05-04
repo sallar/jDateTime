@@ -25,8 +25,8 @@ echo $date->date("l M jS, Y", $time, false, false); //Outputs: Saturday Dec 23rd
 echo "<br />\n";
 echo "<br />\n";
 
-$time2 = $date->mktime(0,0,0,1,1,2010, false, 'America/New_York');  //1262291400
+$time2 = $date->mktime(0,0,0,1,1,2010, false);  //1262291400
 echo $date->date("c", $time2, false, false); //Outputs: 2010-01-01T00:00:00+03:30
 echo "<br />\n";
-//Lets see whens its January 1st in New York, What Time is it in Berlin?
+//Lets see whens its January 1st in Iran, What Time is it in Berlin?
 echo $date->date("c", $time2, false, false, 'Europe/Berlin'); //Outputs: 2009-12-31T21:30:00+01:00 
