@@ -36,7 +36,7 @@
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link       http://pear.php.net/package/PackageName
  * @see        DateTime
- * @version    1.1
+ * @version    1.2
  */
 class jDateTime
 {
@@ -64,9 +64,9 @@ class jDateTime
 	*/
 	public function __construct($convert = null, $jalali = null, $timezone = null)
 	{
-		$this->jalali = ($jalali === false) ? false : true;
-		$this->convert = ($convert === false) ? false : true;
-		$this->timezone = ($timezone != null) ? $timezone : null;
+		if( $jalali   != null ) $this->jalali = ($jalali === false) ? false : true;
+		if( $convert  != null ) $this->convert = ($convert === false) ? false : true;
+		if( $timezone != null ) $this->timezone = ($timezone != null) ? $timezone : null;
 	}
 
     /**
