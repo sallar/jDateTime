@@ -36,7 +36,7 @@
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link       http://pear.php.net/package/PackageName
  * @see        DateTime
- * @version    1.0
+ * @version    SVN: $Id$
  */
 class jDateTime
 {
