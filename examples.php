@@ -18,6 +18,7 @@ echo "<br />\n";
 echo "<br />\n";
 
 $time = $date->mktime(0,0,0,10,2,1368); //630361800
+
 echo $date->date("l Y/m/d", $time); //Outputs: شنبه ۱۳۶۸/۱۰/۰۲
 echo "<br />\n";
 echo $date->date("l M jS, Y", $time, false, false); //Outputs: Saturday Dec 23rd, 1989
@@ -25,8 +26,12 @@ echo $date->date("l M jS, Y", $time, false, false); //Outputs: Saturday Dec 23rd
 echo "<br />\n";
 echo "<br />\n";
 
-$time2 = $date->mktime(0,0,0,1,1,2010, false);  //1262291400
-echo $date->date("c", $time2, false, false); //Outputs: 2010-01-01T00:00:00+03:30
+$time2 = $date->mktime(0,0,0,1,1,2010, false, 'America/New_York');  //1262322000
+
+echo $date->date("c", $time2, false, false, 'America/New_York'); //Outputs: 2010-01-01T00:00:00-05:00
 echo "<br />\n";
-//Lets see whens its January 1st in Iran, What Time is it in Berlin?
-echo $date->date("c", $time2, false, false, 'Europe/Berlin'); //Outputs: 2009-12-31T21:30:00+01:00 
+//Lets see whens its January 1st in New York, What Time is it in Berlin?
+echo $date->date("c", $time2, false, false, 'Europe/Berlin'); //Outputs: 2010-01-01T06:00:00+01:0
+//Or Iran in Native Time?
+echo "<br />\n";
+echo $date->date("c", $time2, false, true, 'Asia/Tehran'); //Outputs: 1388-10-11T08:30:00+03:30

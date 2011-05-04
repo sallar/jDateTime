@@ -36,7 +36,7 @@
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link       http://pear.php.net/package/PackageName
  * @see        DateTime
- * @version    1.0
+ * @version    1.1
  */
 class jDateTime
 {
@@ -262,11 +262,15 @@ class jDateTime
         }
         
         //Create a new object and set the timezone if available
-        $obj = new DateTime($year . '-' . sprintf("%02d", $month) . '-' . sprintf("%02d", $day));
+        $date = $year . '-' . sprintf("%02d", $month) . '-' . sprintf("%02d", $day) . ' ' . $hour . ':' . $minute . ':' . $second;
+        
         if ( $this->timezone != null || $timezone != null ) {
-			$obj->setTimezone( new DateTimeZone(($timezone != null) ? $timezone : $this->timezone) );
+            $obj = new DateTime($date, new DateTimeZone(($timezone != null) ? $timezone : $this->timezone));
 		}
-		
+		else{
+            $obj = new DateTime($date);
+        }
+
 		//Return
         return $obj->format("U");
 	}
