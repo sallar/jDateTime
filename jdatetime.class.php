@@ -256,6 +256,11 @@ class jDateTime
 	*/
 	public function mktime($hour, $minute, $second, $month, $day, $year, $jalali = null, $timezone = null)
 	{
+        //Defaults
+        $month = (intval($month) == 0) ? $this->date('m') : $month;
+        $day   = (intval($day)   == 0) ? $this->date('d') : $day;
+        $year  = (intval($year)  == 0) ? $this->date('Y') : $year;
+        
         //Convert to Gregorian if necessary
         if( $jalali === true || ($jalali === null && $this->jalali === true) ){
             list($year, $month, $day) = $this->toGregorian($year, $month, $day);
