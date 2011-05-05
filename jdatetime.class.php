@@ -36,7 +36,7 @@
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link       http://pear.php.net/package/PackageName
  * @see        DateTime
- * @version    1.2.1
+ * @version    1.3.0
  */
 class jDateTime
 {
@@ -228,6 +228,28 @@ class jDateTime
 
 		}
 
+	}
+	
+	/**
+	 * jDateTime::gDate
+	 *
+	 * Same as jDateTime::Date method
+	 * but this one works as a helper and returns Gregorian Date
+	 * in case someone doesn't like to pass all those false arguments 
+	 * to Date method.
+	 * 
+	 * e.g. $obj->gDate("Y-m-d") //Outputs: 2011-05-05
+	 *      $obj->date("Y-m-d", false, false, false); //Outputs: 2011-05-05
+	 *      Both return the exact same result.
+	 *
+	 * @param $format string Acceps format string based on: php.net/date
+	 * @param $stamp int Unix Timestamp (Epoch Time)
+	 * @param $timezone string (Optional) forces a different timezone. pass null to use system default
+	 * @return string Formatted input
+	*/
+	public function gDate($format, $stamp = false, $timezone = null)
+	{
+	   return $this->date($format, $stamp, false, false, $timezone);
 	}
 	
 	/**

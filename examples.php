@@ -11,6 +11,8 @@ echo "<br />\n";
 echo $date->date("Y-m-d", false, false); // Outputs: 1390-02-15
 echo "<br />\n";
 echo $date->date("Y-m-d", false, false, false); //Outputs: 2011-05-05
+     //Or you could just use: $date->gDate("Y-m-d"); 
+     //Same as above
 echo "<br />\n";
 echo $date->date("l j F Y H:i T", false, null, null, 'America/New_York'); //چهارشنبه ۱۴ اردیبهشت ۱۳۹۰ ۱۵:۳۰ EDT
 
