@@ -121,7 +121,7 @@ class jDateTime
 
 				$v = '';
 				switch ($key) {
-					//Day
+				//Day
 				case 'd':
 					$v = sprintf("%02d", $jday);
 					break;
@@ -152,11 +152,11 @@ class jDateTime
 					}
 					$this->temp['z'] = $v;
 					break;
-					//Week
+				//Week
 				case 'W':
 					$v = is_int($this->temp['z'] / 7) ? ($this->temp['z'] / 7) : intval($this->temp['z'] / 7 + 1);
 					break;
-					//Month
+				//Month
 				case 'F':
 					$v = $this->getMonthNames($jmonth);
 					break;
@@ -172,7 +172,7 @@ class jDateTime
 				case 't':
 					$v = ( $jmonth == 12 ) ? 29 : ( ($jmonth > 6 && $jmonth != 12) ? 30 : 31 );
 					break;
-					//Year
+				//Year
 				case 'L':
 					$tmpObj = new DateTime('@'.(time()-31536000));
 					$v = $tmpObj->format('L');
@@ -184,23 +184,23 @@ class jDateTime
 				case 'y':
 					$v = $jyear % 100;
 					break;
-					//Time
+				//Time
 				case 'a':
 					$v = ($obj->format('a') == 'am') ? 'ق.ظ' : 'ب.ظ';
 					break;
 				case 'A':
 					$v = ($obj->format('A') == 'AM') ? 'قبل از ظهر' : 'بعد از ظهر';
 					break;
-					//Full Dates
+				//Full Dates
 				case 'c':
-					$v  = $jyear . '-' . sprintf("%02d", $jmonth) . '-' . sprintf("%02d", $jday) . 'T';
-					$v .= $obj->format('H') . ':'. $obj->format('i') . ':' . $obj->format('s') . $obj->format('P');
+					$v  = $jyear.'-'.sprintf("%02d", $jmonth).'-'.sprintf("%02d", $jday).'T';
+					$v .= $obj->format('H').':'.$obj->format('i').':'.$obj->format('s').$obj->format('P');
 					break;
 				case 'r':
-					$v  = $this->getDayNames($obj->format('D'), true) . ', ' . sprintf("%02d", $jday) . ' ' . $this->getMonthNames($jmonth, true);
-					$v .= ' ' . $jyear . ' ' . $obj->format('H') . ':'. $obj->format('i') . ':' . $obj->format('s') . ' ' . $obj->format('P');
+					$v  = $this->getDayNames($obj->format('D'), true).', '.sprintf("%02d", $jday).' '.$this->getMonthNames($jmonth, true);
+					$v .= ' '.$jyear.' '.$obj->format('H').':'.$obj->format('i').':'.$obj->format('s').' '.$obj->format('P');
 					break;
-					//Timezone
+				//Timezone
 				case 'e':
 					$v = $obj->format('e');
 					break;
@@ -289,7 +289,7 @@ class jDateTime
 		}
 
 		//Create a new object and set the timezone if available
-		$date = $year . '-' . sprintf("%02d", $month) . '-' . sprintf("%02d", $day) . ' ' . $hour . ':' . $minute . ':' . $second;
+		$date = $year.'-'.sprintf("%02d", $month).'-'.sprintf("%02d", $day).' '.$hour.':'.$minute.':'.$second;
 
 		if ( $this->timezone != null || $timezone != null ) {
 			$obj = new DateTime($date, new DateTimeZone(($timezone != null) ? $timezone : $this->timezone));
