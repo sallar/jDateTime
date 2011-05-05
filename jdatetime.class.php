@@ -50,17 +50,17 @@ class jDateTime
 	private $temp = array();
     
     /**
-	 * jDateTime::Constructor
-	 *
-	 * Pass these parameteres when creating a new instance 
-	 * of this Class, and they will be used as defaults.
-	 * e.g $obj = new jDateTime(false, true, 'Asia/Tehran');
-	 * To use system defaults pass null for each one or just
-	 * create the object without any parameters.
-	 *
-	 * @param $convert bool Converts numbers to Farsi
-	 * @param $jalali bool Converts date to Jalali
-	 * @param $timezone string Timezone string
+     * jDateTime::Constructor
+     *
+     * Pass these parameteres when creating a new instance 
+     * of this Class, and they will be used as defaults.
+     * e.g $obj = new jDateTime(false, true, 'Asia/Tehran');
+     * To use system defaults pass null for each one or just
+     * create the object without any parameters.
+     *
+     * @param $convert bool Converts numbers to Farsi
+     * @param $jalali bool Converts date to Jalali
+     * @param $timezone string Timezone string
 	*/
 	public function __construct($convert = null, $jalali = null, $timezone = null)
 	{
@@ -70,20 +70,20 @@ class jDateTime
 	}
 
     /**
-	 * jDateTime::Date
-	 *
-	 * Formats and returns given timestamp just like php's
-	 * built in date() function.
-	 * e.g:
-	 * $obj->date("Y-m-d H:i", time());
-	 * $obj->date("Y-m-d", time(), false, false, 'America/New_York');
-	 *
-	 * @param $format string Acceps format string based on: php.net/date
-	 * @param $stamp int Unix Timestamp (Epoch Time)
-	 * @param $convert bool (Optional) forces convert action. pass null to use system default
-	 * @param $jalali bool (Optional) forces jalali conversion. pass null to use system default
-	 * @param $timezone string (Optional) forces a different timezone. pass null to use system default
-	 * @return string Formatted input
+     * jDateTime::Date
+     *
+     * Formats and returns given timestamp just like php's
+     * built in date() function.
+     * e.g:
+     * $obj->date("Y-m-d H:i", time());
+     * $obj->date("Y-m-d", time(), false, false, 'America/New_York');
+     *
+     * @param $format string Acceps format string based on: php.net/date
+     * @param $stamp int Unix Timestamp (Epoch Time)
+     * @param $convert bool (Optional) forces convert action. pass null to use system default
+     * @param $jalali bool (Optional) forces jalali conversion. pass null to use system default
+     * @param $timezone string (Optional) forces a different timezone. pass null to use system default
+     * @return string Formatted input
 	*/
 	public function date($format, $stamp = false, $convert = null, $jalali = null, $timezone = null)
 	{
@@ -154,8 +154,8 @@ class jDateTime
     					break;
     				//Week
     				case 'W':
-    				    $v = is_int($this->temp['z'] / 7) ? ($this->temp['z'] / 7) : intval($this->temp['z'] / 7 + 1);
-    				    break;
+    			        $v = is_int($this->temp['z'] / 7) ? ($this->temp['z'] / 7) : intval($this->temp['z'] / 7 + 1);
+    			        break;
     				//Month
     				case 'F':
     					$v = $this->getMonthNames($jmonth);
@@ -170,12 +170,12 @@ class jDateTime
     					$v = $jmonth;
     					break;
     				case 't':
-    				    $v = ( $jmonth == 12 ) ? 29 : ( ($jmonth > 6 && $jmonth != 12) ? 30 : 31 );
-    				    break; 
+    			        $v = ( $jmonth == 12 ) ? 29 : ( ($jmonth > 6 && $jmonth != 12) ? 30 : 31 );
+    			        break; 
     				//Year
     				case 'L':
-    				    $tmpObj = new DateTime('@'.(time()-31536000));
-    				    $v = $tmpObj->format('L');
+    			        $tmpObj = new DateTime('@'.(time()-31536000));
+    			        $v = $tmpObj->format('L');
                         break;
                     case 'o':
                     case 'Y':
@@ -221,60 +221,60 @@ class jDateTime
             //Return
 			$ret = strtr($format, array_combine($keys, $values));
 			return
-		         ($convert === false ||
-		         ($convert === null && $this->convert === false) ||
-		         ( $jalali === false || $jalali === null && $this->jalali === false ))
-		         ? $ret : $this->convertNumbers($ret);
+	             ($convert === false ||
+	             ($convert === null && $this->convert === false) ||
+	             ( $jalali === false || $jalali === null && $this->jalali === false ))
+	             ? $ret : $this->convertNumbers($ret);
 
 		}
 
 	}
 	
 	/**
-	 * jDateTime::gDate
-	 *
-	 * Same as jDateTime::Date method
-	 * but this one works as a helper and returns Gregorian Date
-	 * in case someone doesn't like to pass all those false arguments 
-	 * to Date method.
-	 * 
-	 * e.g. $obj->gDate("Y-m-d") //Outputs: 2011-05-05
-	 *      $obj->date("Y-m-d", false, false, false); //Outputs: 2011-05-05
-	 *      Both return the exact same result.
-	 *
-	 * @param $format string Acceps format string based on: php.net/date
-	 * @param $stamp int Unix Timestamp (Epoch Time)
-	 * @param $timezone string (Optional) forces a different timezone. pass null to use system default
-	 * @return string Formatted input
+     * jDateTime::gDate
+     *
+     * Same as jDateTime::Date method
+     * but this one works as a helper and returns Gregorian Date
+     * in case someone doesn't like to pass all those false arguments 
+     * to Date method.
+     * 
+     * e.g. $obj->gDate("Y-m-d") //Outputs: 2011-05-05
+     *      $obj->date("Y-m-d", false, false, false); //Outputs: 2011-05-05
+     *      Both return the exact same result.
+     *
+     * @param $format string Acceps format string based on: php.net/date
+     * @param $stamp int Unix Timestamp (Epoch Time)
+     * @param $timezone string (Optional) forces a different timezone. pass null to use system default
+     * @return string Formatted input
 	*/
 	public function gDate($format, $stamp = false, $timezone = null)
 	{
-	   return $this->date($format, $stamp, false, false, $timezone);
+       return $this->date($format, $stamp, false, false, $timezone);
 	}
 	
 	/**
-	 * jDateTime::Mktime
-	 *
-	 * Creates a Unix Timestamp (Epoch Time) based on given parameters
-	 * works like php's built in mktime() function.
-	 * e.g:
-	 * $time = $obj->mktime(0,0,0,2,10,1368);
-	 * $obj->date("Y-m-d", $time); //Format and Display
-	 * $obj->date("Y-m-d", $time, false, false); //Display in Gregorian !
+     * jDateTime::Mktime
+     *
+     * Creates a Unix Timestamp (Epoch Time) based on given parameters
+     * works like php's built in mktime() function.
+     * e.g:
+     * $time = $obj->mktime(0,0,0,2,10,1368);
+     * $obj->date("Y-m-d", $time); //Format and Display
+     * $obj->date("Y-m-d", $time, false, false); //Display in Gregorian !
      * 
      * You can force gregorian mktime if system default is jalali and you
      * need to create a timestamp based on gregorian date
-	 * $time2 = $obj->mktime(0,0,0,12,23,1989, false);
-	 * 
-	 * @param $hour int Hour based on 24 hour system
-	 * @param $minute int Minutes 
-	 * @param $second int Seconds
-	 * @param $month int Month Number
-	 * @param $day int Day Number
-	 * @param $year int Four-digit Year number eg. 1390
-	 * @param $jalali bool (Optional) pass false if you want to input gregorian time
-	 * @param $timezone string (Optional) acceps an optional timezone if you want one
-	 * @return int Unix Timestamp (Epoch Time)
+     * $time2 = $obj->mktime(0,0,0,12,23,1989, false);
+     * 
+     * @param $hour int Hour based on 24 hour system
+     * @param $minute int Minutes 
+     * @param $second int Seconds
+     * @param $month int Month Number
+     * @param $day int Day Number
+     * @param $year int Four-digit Year number eg. 1390
+     * @param $jalali bool (Optional) pass false if you want to input gregorian time
+     * @param $timezone string (Optional) acceps an optional timezone if you want one
+     * @return int Unix Timestamp (Epoch Time)
 	*/
 	public function mktime($hour, $minute, $second, $month, $day, $year, $jalali = null, $timezone = null)
 	{
@@ -303,8 +303,8 @@ class jDateTime
 	}
 
     /**
-	 * System Helpers below
-	 *
+     * System Helpers below
+     *
 	*/
 	private function getDayNames($day, $shorten = false, $len = 1, $numeric = false)
 	{
@@ -354,9 +354,9 @@ class jDateTime
 	}
     
     /**
-	 * Gregorian to Jalali Conversion
-	 * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi 
-	 *
+     * Gregorian to Jalali Conversion
+     * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi 
+     *
 	*/
     
 	public function toJalali($g_y, $g_m, $g_d)
@@ -401,9 +401,9 @@ class jDateTime
 	}
 
     /**
-	 * Jalali to Gregorian Conversion
-	 * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi 
-	 *
+     * Jalali to Gregorian Conversion
+     * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi 
+     *
 	*/
 	public function toGregorian($j_y, $j_m, $j_d)
 	{
