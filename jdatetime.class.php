@@ -36,7 +36,7 @@
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link       http://pear.php.net/package/PackageName
  * @see        DateTime
- * @version    1.3.0
+ * @version    1.4.0
  */
 class jDateTime
 {
@@ -99,9 +99,13 @@ class jDateTime
             return $obj->format($format);
         }
         else {
-
+            
+            //Find what to replace
+            $chars = (preg_match_all('/([a-zA-Z]{1})/', $format, $chars)) ? $chars[0] : array();
+            
             //Intact Keys
             $intact = array('B','h','H','g','G','i','s','I','U','u','Z','O','P');
+            $intact = $this->filterArray($chars, $intact);
             $intactValues = array();
 
             foreach ($intact as $k => $v) {
@@ -115,6 +119,7 @@ class jDateTime
             list($jyear, $jmonth, $jday) = $this->toJalali($year, $month, $day);
 
             $keys = array('d','D','j','l','N','S','w','z','W','F','m','M','n','t','L','o','Y','y','a','A','c','r','e','T');
+            $keys = $this->filterArray($chars, $keys, array('z'));
             $values = array();
 
             foreach ($keys as $k => $key) {
@@ -306,6 +311,17 @@ class jDateTime
      * System Helpers below
      *
      */
+    private function filterArray($needle, $heystack, $always = array())
+    {
+        foreach($heystack as $k => $v)
+        {
+            if( !in_array($v, $needle) && !in_array($v, $always) )
+                unset($heystack[$k]);
+        }
+        
+        return $heystack;
+    }
+    
     private function getDayNames($day, $shorten = false, $len = 1, $numeric = false)
     {
         $ret = '';
