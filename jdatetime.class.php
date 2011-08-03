@@ -34,7 +34,7 @@
  * @author     Sallar Kaboli <me@sallar.ir>
  * @copyright  2003-2011 Sallar Kaboli
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link       http://pear.php.net/package/PackageName
+ * @link       http://sallar.ir/projects/jdatetime/
  * @see        DateTime
  * @version    1.4.0
  */
