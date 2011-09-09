@@ -24,5 +24,5 @@ Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
 
 # Support jDateTime
   
-[![Donate via Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R7Y6R3UZLUNP6)  
+[![Donate via Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R7Y6R3UZLUNP6)
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=sallar&url=https://github.com/sallar/jDateTime&title=Jalali/Shamsi DateTime class for php&language=fa_FA&tags=github&category=software)  
