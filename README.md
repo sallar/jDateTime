@@ -1,3 +1,5 @@
+# About jDateTime
+
 Jalali DateTime Class, supports years higher than 2038  
 by: Sallar Kaboli  
  
@@ -25,12 +27,5 @@ Documentation and Instructions in Persian:
 
 # Support jDateTime
   
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=sallar&url=https://github.com/sallar/jDateTime&title=Jalali/Shamsi DateTime class for php&language=fa_FA&tags=github&category=software)
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="R7Y6R3UZLUNP6">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=sallar&url=https://github.com/sallar/jDateTime&title=Jalali/Shamsi DateTime class for php&language=fa_FA&tags=github&category=software)  
+[![Donate via Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R7Y6R3UZLUNP6)
