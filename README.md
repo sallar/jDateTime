@@ -22,3 +22,6 @@ http://www.php.net/manual/en/timezones.php
 
 Documentation and Instructions in Persian:
 http://sallar.ir/projects/jdatetime
+
+Support jDateTime
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=sallar&url=https://github.com/sallar/jDateTime&title=Jalali/Shamsi DateTime class for php&language=fa_FA&tags=github&category=software)
