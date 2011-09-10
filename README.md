@@ -21,6 +21,7 @@ Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
   
 [List of supported timezones](http://www.php.net/manual/en/timezones.php)  
 [Documentation and Instructions in Persian](http://sallar.ir/projects/jdatetime)  
+[Project page in phpclasses.org](http://www.phpclasses.org/jdatetime)   
 
 # Support jDateTime
   
