@@ -280,9 +280,7 @@ class jDateTime
     public function strftime($format, $stamp = false, $jalali = null, $timezone = null)
     {
         //Defaults
-        if ($stamp == false) {
-            $stamp = time();
-        }
+        $stamp = (!$stamp) ? time() : $stamp;
 
         $str_format_code = array(
             "%a", "%A", "%d", "%e", "%j", "%u", "%w",
