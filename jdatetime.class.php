@@ -31,12 +31,13 @@
  * send a note to license@php.net so we can mail you a copy immediately.
  *
  * @package    jDateTime
- * @author     Sallar Kaboli <me@sallar.ir>
+ * @author     Sallar Kaboli <sallar.kaboli@gmail.com>
+ * @author     Omid Pilevar <omid.pixel@gmail.com>
  * @copyright  2003-2011 Sallar Kaboli
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @link       http://sallar.ir/projects/jdatetime/
+ * @link       http://sallar.me/projects/jdatetime/
  * @see        DateTime
- * @version    1.4.0
+ * @version    1.5.0
  */
 class jDateTime
 {
@@ -58,6 +59,7 @@ class jDateTime
      * To use system defaults pass null for each one or just
      * create the object without any parameters.
      *
+     * @author Sallar Kaboli
      * @param $convert bool Converts numbers to Farsi
      * @param $jalali bool Converts date to Jalali
      * @param $timezone string Timezone string
@@ -78,6 +80,7 @@ class jDateTime
      * $obj->date("Y-m-d H:i", time());
      * $obj->date("Y-m-d", time(), false, false, 'America/New_York');
      *
+     * @author Sallar Kaboli
      * @param $format string Acceps format string based on: php.net/date
      * @param $stamp int Unix Timestamp (Epoch Time)
      * @param $convert bool (Optional) forces convert action. pass null to use system default
@@ -247,6 +250,7 @@ class jDateTime
      *      $obj->date("Y-m-d", false, false, false); //Outputs: 2011-05-05
      *      Both return the exact same result.
      *
+     * @author Sallar Kaboli
      * @param $format string Acceps format string based on: php.net/date
      * @param $stamp int Unix Timestamp (Epoch Time)
      * @param $timezone string (Optional) forces a different timezone. pass null to use system default
@@ -256,8 +260,57 @@ class jDateTime
     {
         return $this->date($format, $stamp, false, false, $timezone);
     }
-
+    
     /**
+     * jDateTime::Strftime
+     *
+     * Format a local time/date according to locale settings
+     * built in strftime() function.
+     * e.g:
+     * $obj->strftime("%x %H", time());
+     * $obj->strftime("%H", time(), false, false, 'America/New_York');
+     *
+     * @author Omid Pilevar
+     * @param $format string Acceps format string based on: php.net/date
+     * @param $stamp int Unix Timestamp (Epoch Time)
+     * @param $jalali bool (Optional) forces jalali conversion. pass null to use system default
+     * @param $timezone string (Optional) forces a different timezone. pass null to use system default
+     * @return string Formatted input
+     */
+    public function strftime($format, $stamp = false, $jalali = null, $timezone = null)
+    {
+        //Defaults
+        if ($stamp == false) {
+            $stamp = time();
+        }
+
+        $str_format_code = array(
+            "%a", "%A", "%d", "%e", "%j", "%u", "%w",
+            "%U", "%V", "%W",
+            "%b", "%B", "%h", "%m",
+            "%C", "%g", "%G", "%y", "%Y",
+            "%H", "%I", "%l", "%M", "%p", "%P", "%r", "%R", "%S", "%T", "%X", "%z", "%Z",
+            "%c", "%D", "%F", "%s", "%x",
+            "%n", "%t", "%%"
+        );
+        $date_format_code = array(
+            "D", "l", "d", "j", "z", "N", "w",
+            "W", "W", "W",
+            "M", "F", "M", "m",
+            "y", "y", "y", "y", "Y",
+            "H", "h", "g", "i", "A", "a", "h:i:s A", "H:i", "s", "H:i:s", "h:i:s", "H", "H",
+            "D j M H:i:s", "d/m/y", "Y-m-d", "U", "d/m/y",
+            "\n", "\t", "%"
+        );
+
+        //Change Strftime format to Date format
+        $format = str_replace($str_format_code, $date_format_code, $format);
+
+        //Convert to date
+        return $this->date($format, $stamp, $jalali, $timezone);
+    }
+	
+   /**
      * jDateTime::Mktime
      *
      * Creates a Unix Timestamp (Epoch Time) based on given parameters
@@ -271,6 +324,7 @@ class jDateTime
      * need to create a timestamp based on gregorian date
      * $time2 = $obj->mktime(0,0,0,12,23,1989, false);
      *
+     * @author Sallar Kaboli
      * @param $hour int Hour based on 24 hour system
      * @param $minute int Minutes
      * @param $second int Seconds
@@ -305,6 +359,56 @@ class jDateTime
 
         //Return
         return $obj->format("U");
+    }
+    
+    /**
+     * jDateTime::Checkdate
+     *
+     * Checks the validity of the date formed by the arguments.
+     * A date is considered valid if each parameter is properly defined.
+     * works like php's built in checkdate() function.
+     * Leap years are taken into consideration.
+     * e.g:
+     * $obj->checkdate(10, 21, 1390); // Return true
+     * $obj->checkdate(9, 31, 1390);  // Return false
+     *
+     * You can force gregorian checkdate if system default is jalali and you
+     * need to check based on gregorian date
+     * $check = $obj->checkdate(12, 31, 2011, false);
+     *
+     * @author Omid Pilevar
+     * @param $month int The month is between 1 and 12 inclusive.
+     * @param $day int The day is within the allowed number of days for the given month.
+     * @param $year int The year is between 1 and 32767 inclusive.
+     * @param $jalali bool (Optional) pass false if you want to input gregorian time
+     * @return bool
+     */
+    public function checkdate($month, $day, $year, $jalali = null)
+    {
+        //Defaults
+        $month = (intval($month) == 0) ? $this->date('n') : intval($month);
+        $day   = (intval($day)   == 0) ? $this->date('j') : intval($day);
+        $year  = (intval($year)  == 0) ? $this->date('Y') : intval($year);
+        
+        //Check if its jalali date
+        if ( $jalali === true || ($jalali === null && $this->jalali === true) )
+        {
+            $epoch = $this->mktime(0, 0, 0, $month, $day, $year);
+            
+            if( $this->date("Y-n-j", $epoch,false) == "$year-$month-$day" ) {
+                $ret = true;
+            }
+            else{
+                $ret = false; 
+            }
+        }
+        else //Gregorian Date
+        { 
+            $ret = checkdate($month, $day, $year);
+        }
+        
+        //Return
+        return $ret;
     }
 
     /**
@@ -345,7 +449,7 @@ class jDateTime
             case '2': $ret = 'اردیبهشت'; break;
             case '3': $ret = 'خرداد'; break;
             case '4': $ret = 'تیر'; break;
-            case '5': $ret = 'مرداد'; break;
+            case '5': $ret = 'امرداد'; break;
             case '6': $ret = 'شهریور'; break;
             case '7': $ret = 'مهر'; break;
             case '8': $ret = 'آبان'; break;
