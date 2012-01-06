@@ -3,6 +3,13 @@
 //Include
 require_once dirname(__FILE__) . '/jdatetime.class.php';
 
+//Just adding routine html tags and setting encoding to view Persian characters correctly.
+echo "<html>";
+echo "<head>";
+echo "<meta charset='utf-8'>";
+echo "</head>";
+echo "<body>";
+
 //Init
 $date = new jDateTime(true, true, 'Asia/Tehran');
 
@@ -37,3 +44,6 @@ echo $date->date("c", $time2, false, false, 'Europe/Berlin'); //Outputs: 2010-01
 //Or Iran in Native Time?
 echo "<br />\n";
 echo $date->date("c", $time2, false, true, 'Asia/Tehran'); //Outputs: 1388-10-11T08:30:00+03:30
+
+//Just adding routine html tags.
+echo "</body>";
