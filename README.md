@@ -1,7 +1,10 @@
 # About jDateTime
 
 Jalali/Shamsi DateTime Class, supports years higher than 2038  
-by: [Sallar Kaboli](http://sallar.ir)  
+Contributers:  
+[Sallar Kaboli](http://sallar.me)  
+[Omid Pilevar](http://pilevar.ir)  
+[Amir Latifi](http://amiir.me)
  
 Requires **PHP >= 5.2**  
 
@@ -13,14 +16,14 @@ and beside the fact that it's amazing and also helped me to write this
 one, it's really out of date, and can't be used in modern real world  
 web applications as it is completely written in functions.  
   
-Copyright (C) 2011  [Sallar Kaboli](http://sallar.ir)  
+Copyright (C) 2011  [Sallar Kaboli](http://sallar.me)  
 Part of Phoenix Framework (p5x.org) by [Phoenix Alternatvie](http://p5x.org)
   
 Original Jalali to Gregorian (and vice versa) convertor:  
 Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi  
   
 [List of supported timezones](http://www.php.net/manual/en/timezones.php)  
-[Documentation and Instructions in Persian](http://sallar.ir/projects/jdatetime)  
+[Documentation and Instructions in Persian](http://sallar.me/projects/jdatetime)  
 [Project page in phpclasses.org](http://www.phpclasses.org/jdatetime)   
 
 # Support jDateTime
