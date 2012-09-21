@@ -47,3 +47,4 @@ echo $date->date("c", $time2, false, true, 'Asia/Tehran'); //Outputs: 1388-10-11
 
 //Just adding routine html tags.
 echo "</body>";
+echo "</html>";
