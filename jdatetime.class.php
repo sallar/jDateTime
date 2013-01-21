@@ -178,7 +178,10 @@ class jDateTime
                         $v = $jmonth;
                         break;
                     case 't':
-                        $v = ( $jmonth == 12 ) ? 29 : ( ($jmonth > 6 && $jmonth != 12) ? 30 : 31 );
+                    	if ($jmonth>=1 && $jmonth<=6) $v=31;
+                    	else if ($jmonth>=7 && $jmonth<=11) $v=30;
+                    	else if($jmonth==12 && $jyear % 4 ==3) $v=30;
+                    	else if ($jmonth==12 && $jyear % 4 !=3) $v=29;
                         break;
                     //Year
                     case 'L':
