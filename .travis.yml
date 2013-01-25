@@ -5,4 +5,4 @@ php:
   - 5.3
   - 5.4
 
-script: phpunit --configuration phpunit.conf.xml --coverage-text
+script: phpunit --configuration phpunit.xml --coverage-text
