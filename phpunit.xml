@@ -2,7 +2,7 @@
 
 <phpunit bootstrap="Tests/bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="jDateTime Unit Tests">
+        <testsuite name="Project Test Suite">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
