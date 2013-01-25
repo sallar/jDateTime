@@ -1,6 +1,6 @@
 <?php
 
-class JDateTimeUnitTests extends PHPUnit_Framework_TestCase
+class JDateTimeTest extends PHPUnit_Framework_TestCase
 {
     public function testFirstTest()
     {
