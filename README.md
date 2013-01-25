@@ -1,5 +1,6 @@
 # jDateTime
 Jalali (Shamsi) DadeTime class written in PHP, Supports year higher than 2038.  
+[![Build Status](https://travis-ci.org/sallar/jDateTime.png?branch=master)](https://travis-ci.org/sallar/jDateTime)
 
 ### About v2.0.0
 
