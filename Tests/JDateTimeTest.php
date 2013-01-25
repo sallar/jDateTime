@@ -2,8 +2,8 @@
 
 class JDateTimeTest extends PHPUnit_Framework_TestCase
 {
-		//Start test
-		public function setUp()
+    //Start test
+    public function setUp()
     {
         //nothing
     }
