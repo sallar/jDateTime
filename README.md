@@ -9,8 +9,10 @@ PHP's default `date` function does not support years higher than
 
 ### Contributors:
 - [Sallar Kaboli](http://sallar.me)  
-- [Omid Pilevar](http://pilevar.ir)  
+- [Omid Pilevar](http://pilevar.ir)
+- [Afshin Mehrabani](http://afshinm.name)  
 - [Amir Latifi](http://amiir.me)
+- [Ruhollah Namjoo](https://github.com/namjoo)
 
 ### Requirements
 jDateTime Requires **PHP >= 5.2**  
