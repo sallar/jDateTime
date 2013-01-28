@@ -39,7 +39,7 @@
  * @license    http://opensource.org/licenses/mit-license.php The MIT License
  * @link       https://github.com/sallar/jDateTime
  * @see        DateTime
- * @version    2.0.0
+ * @version    2.1.5
  */
 class jDateTime
 {
@@ -95,7 +95,7 @@ class jDateTime
         //Timestamp + Timezone
         $stamp    = ($stamp != false) ? $stamp : time();
         $timezone = ($timezone != null) ? $timezone : ((self::$timezone != null) ? self::$timezone : date_default_timezone_get());
-        $obj      = new DateTime('@' . $stamp);
+        $obj      = new DateTime('@' . $stamp, new DateTimeZone($timezone));
         $obj->setTimezone(new DateTimeZone($timezone));
 
         if ( (self::$jalali === false && $jalali === null) || $jalali === false ) {
