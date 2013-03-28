@@ -39,7 +39,7 @@
  * @license    http://opensource.org/licenses/mit-license.php The MIT License
  * @link       https://github.com/sallar/jDateTime
  * @see        DateTime
- * @version    2.1.5
+ * @version    2.1.6
  */
 class jDateTime
 {
@@ -276,11 +276,12 @@ class jDateTime
      * @author Omid Pilevar
      * @param $format string Acceps format string based on: php.net/date
      * @param $stamp int Unix Timestamp (Epoch Time)
+     * @param $convert bool (Optional) forces convert action. pass null to use system default
      * @param $jalali bool (Optional) forces jalali conversion. pass null to use system default
      * @param $timezone string (Optional) forces a different timezone. pass null to use system default
      * @return string Formatted input
      */
-    public static function strftime($format, $stamp = false, $jalali = null, $timezone = null)
+    public static function strftime($format, $stamp = false, $convert = null, $jalali = null, $timezone = null)
     {
         $str_format_code = array(
             "%a", "%A", "%d", "%e", "%j", "%u", "%w",
@@ -306,7 +307,7 @@ class jDateTime
         $format = str_replace($str_format_code, $date_format_code, $format);
 
         //Convert to date
-        return self::date($format, $stamp, $jalali, $timezone);
+        return self::date($format, $stamp, $convert, $jalali, $timezone);
     }
 	
    /**
