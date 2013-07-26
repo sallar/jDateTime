@@ -449,7 +449,7 @@ class jDateTime
             case '2': $ret = 'اردیبهشت'; break;
             case '3': $ret = 'خرداد'; break;
             case '4': $ret = 'تیر'; break;
-            case '5': $ret = 'امرداد'; break;
+            case '5': $ret = 'مرداد'; break;
             case '6': $ret = 'شهریور'; break;
             case '7': $ret = 'مهر'; break;
             case '8': $ret = 'آبان'; break;
