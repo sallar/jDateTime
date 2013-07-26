@@ -4,7 +4,7 @@ jDateTime
 Jalali (Shamsi) DadeTime class written in PHP, Supports year higher than 2038.  
 [![Build Status](https://travis-ci.org/sallar/jDateTime.png?branch=master)](https://travis-ci.org/sallar/jDateTime)
 
-##About v2.1.5
+##About v2.1.6
 
 PHP's default `date` function does not support years higher than 2038, so the `DateTime` class was introduced in PHP5 to solve this problem and provide more sophisticated date methods. Iranian users have been using an old `jdate` function to convert Gregorian date to the Jalali equivalent, which is completely based on the old php `date` function so its pretty much out-dated. 
 
