@@ -39,7 +39,7 @@
  * @license    http://opensource.org/licenses/mit-license.php The MIT License
  * @link       https://github.com/sallar/jDateTime
  * @see        DateTime
- * @version    2.1.6
+ * @version    2.2.0
  */
 class jDateTime
 {
@@ -47,8 +47,8 @@ class jDateTime
     /**
      * Defaults
      */
-    private static $jalali = true; //Use Jalali Date, If set to false, falls back to gregorian
-    private static $convert = true; //Convert numbers to Farsi characters in utf-8
+    private static $jalali   = true; //Use Jalali Date, If set to false, falls back to gregorian
+    private static $convert  = true; //Convert numbers to Farsi characters in utf-8
     private static $timezone = null; //Timezone String e.g Asia/Tehran, Defaults to Server Timezone Settings
     private static $temp = array();
 
@@ -68,9 +68,9 @@ class jDateTime
      */
     public function __construct($convert = null, $jalali = null, $timezone = null)
     {
-        if ( $jalali   !== null ) self::$jalali = ($jalali === false) ? false : true;
-        if ( $convert  !== null ) self::$convert = ($convert === false) ? false : true;
-        if ( $timezone !== null ) self::$timezone = ($timezone != null) ? $timezone : null;
+        if ( $jalali   !== null ) self::$jalali   = (bool) $jalali;
+        if ( $convert  !== null ) self::$convert  = (bool) $convert;
+        if ( $timezone !== null ) self::$timezone = $timezone;
     }
 
     /**
@@ -93,7 +93,7 @@ class jDateTime
     public static function date($format, $stamp = false, $convert = null, $jalali = null, $timezone = null)
     {
         //Timestamp + Timezone
-        $stamp    = ($stamp != false) ? $stamp : time();
+        $stamp    = ($stamp !== false) ? $stamp : time();
         $timezone = ($timezone != null) ? $timezone : ((self::$timezone != null) ? self::$timezone : date_default_timezone_get());
         $obj      = new DateTime('@' . $stamp, new DateTimeZone($timezone));
         $obj->setTimezone(new DateTimeZone($timezone));
@@ -131,7 +131,7 @@ class jDateTime
                 switch ($key) {
                     //Day
                     case 'd':
-                        $v = sprintf("%02d", $jday);
+                        $v = sprintf('%02d', $jday);
                         break;
                     case 'D':
                         $v = self::getDayNames($obj->format('D'), true);
@@ -169,7 +169,7 @@ class jDateTime
                         $v = self::getMonthNames($jmonth);
                         break;
                     case 'm':
-                        $v = sprintf("%02d", $jmonth);
+                        $v = sprintf('%02d', $jmonth);
                         break;
                     case 'M':
                         $v = self::getMonthNames($jmonth, true);
@@ -204,11 +204,11 @@ class jDateTime
                         break;
                     //Full Dates
                     case 'c':
-                        $v  = $jyear.'-'.sprintf("%02d", $jmonth).'-'.sprintf("%02d", $jday).'T';
+                        $v  = $jyear.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $jday).'T';
                         $v .= $obj->format('H').':'.$obj->format('i').':'.$obj->format('s').$obj->format('P');
                         break;
                     case 'r':
-                        $v  = self::getDayNames($obj->format('D'), true).', '.sprintf("%02d", $jday).' '.self::getMonthNames($jmonth, true);
+                        $v  = self::getDayNames($obj->format('D'), true).', '.sprintf('%02d', $jday).' '.self::getMonthNames($jmonth, true);
                         $v .= ' '.$jyear.' '.$obj->format('H').':'.$obj->format('i').':'.$obj->format('s').' '.$obj->format('P');
                         break;
                     //Timezone
@@ -284,23 +284,23 @@ class jDateTime
     public static function strftime($format, $stamp = false, $convert = null, $jalali = null, $timezone = null)
     {
         $str_format_code = array(
-            "%a", "%A", "%d", "%e", "%j", "%u", "%w",
-            "%U", "%V", "%W",
-            "%b", "%B", "%h", "%m",
-            "%C", "%g", "%G", "%y", "%Y",
-            "%H", "%I", "%l", "%M", "%p", "%P", "%r", "%R", "%S", "%T", "%X", "%z", "%Z",
-            "%c", "%D", "%F", "%s", "%x",
-            "%n", "%t", "%%"
+            '%a', '%A', '%d', '%e', '%j', '%u', '%w',
+            '%U', '%V', '%W',
+            '%b', '%B', '%h', '%m',
+            '%C', '%g', '%G', '%y', '%Y',
+            '%H', '%I', '%l', '%M', '%p', '%P', '%r', '%R', '%S', '%T', '%X', '%z', '%Z',
+            '%c', '%D', '%F', '%s', '%x',
+            '%n', '%t', '%%'
         );
         
         $date_format_code = array(
-            "D", "l", "d", "j", "z", "N", "w",
-            "W", "W", "W",
-            "M", "F", "M", "m",
-            "y", "y", "y", "y", "Y",
-            "H", "h", "g", "i", "A", "a", "h:i:s A", "H:i", "s", "H:i:s", "h:i:s", "H", "H",
-            "D j M H:i:s", "d/m/y", "Y-m-d", "U", "d/m/y",
-            "\n", "\t", "%"
+            'D', 'l', 'd', 'j', 'z', 'N', 'w',
+            'W', 'W', 'W',
+            'M', 'F', 'M', 'm',
+            'y', 'y', 'y', 'y', 'Y',
+            'H', 'h', 'g', 'i', 'A', 'a', 'h:i:s A', 'H:i', 's', 'H:i:s', 'h:i:s', 'H', 'H',
+            'D j M H:i:s', 'd/m/y', 'Y-m-d', 'U', 'd/m/y',
+            '\n', '\t', '%'
         );
 
         //Change Strftime format to Date format
@@ -348,7 +348,7 @@ class jDateTime
         }
 
         //Create a new object and set the timezone if available
-        $date = $year.'-'.sprintf("%02d", $month).'-'.sprintf("%02d", $day).' '.$hour.':'.$minute.':'.$second;
+        $date = $year.'-'.sprintf('%02d', $month).'-'.sprintf('%02d', $day).' '.$hour.':'.$minute.':'.$second;
 
         if ( self::$timezone != null || $timezone != null ) {
             $obj = new DateTime($date, new DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
@@ -358,7 +358,7 @@ class jDateTime
         }
 
         //Return
-        return $obj->format("U");
+        return $obj->format('U');
     }
     
     /**
@@ -395,7 +395,7 @@ class jDateTime
         {
             $epoch = self::mktime(0, 0, 0, $month, $day, $year);
             
-            if( self::date("Y-n-j", $epoch,false) == "$year-$month-$day" ) {
+            if( self::date('Y-n-j', $epoch,false) == "$year-$month-$day" ) {
                 $ret = true;
             }
             else{
@@ -413,64 +413,83 @@ class jDateTime
 
     /**
      * System Helpers below
-     *
+     * ------------------------------------------------------
+     */
+    
+    /**
+     * Filters out an array
      */
     private static function filterArray($needle, $heystack, $always = array())
     {
-        foreach($heystack as $k => $v)
-        {
-            if( !in_array($v, $needle) && !in_array($v, $always) )
-                unset($heystack[$k]);
-        }
-        
-        return $heystack;
+        return array_intersect(array_merge($needle, $always), $heystack);
     }
     
+    /**
+     * Returns correct names for week days
+     */
     private static function getDayNames($day, $shorten = false, $len = 1, $numeric = false)
     {
-        $ret = '';
-        switch ( strtolower($day) ) {
-            case 'sat': case 'saturday': $ret = 'شنبه'; $n = 1; break;
-            case 'sun': case 'sunday': $ret = 'یکشنبه'; $n = 2; break;
-            case 'mon': case 'monday': $ret = 'دوشنبه'; $n = 3; break;
-            case 'tue': case 'tuesday': $ret = 'سه شنبه'; $n = 4; break;
-            case 'wed': case 'wednesday': $ret = 'چهارشنبه'; $n = 5; break;
-            case 'thu': case 'thursday': $ret = 'پنجشنبه'; $n = 6; break;
-            case 'fri': case 'friday': $ret = 'جمعه'; $n = 7; break;
-        }
-        return ($numeric) ? $n : (($shorten) ? mb_substr($ret, 0, $len, 'UTF-8') : $ret);
+        $days = array(
+            'sat' => array(1, 'شنبه'),
+            'sun' => array(2, 'یکشنبه'),
+            'mon' => array(3, 'دوشنبه'),
+            'tue' => array(4, 'سه شنبه'),
+            'wed' => array(5, 'چهارشنبه'),
+            'thu' => array(6, 'پنجشنبه'),
+            'fri' => array(7, 'جمعه')
+        );
+
+        $day = substr(strtolower($day), 0, 3);
+        $day = $days[$day];
+
+        return ($numeric) ? $day[0] : (($shorten) ? self::substr($day[1], 0, $len) : $day[1]);
     }
 
+    /**
+     * Returns correct names for months
+     */
     private static function getMonthNames($month, $shorten = false, $len = 3)
     {
-        $ret = '';
-        switch ( $month ) {
-            case '1': $ret = 'فروردین'; break;
-            case '2': $ret = 'اردیبهشت'; break;
-            case '3': $ret = 'خرداد'; break;
-            case '4': $ret = 'تیر'; break;
-            case '5': $ret = 'مرداد'; break;
-            case '6': $ret = 'شهریور'; break;
-            case '7': $ret = 'مهر'; break;
-            case '8': $ret = 'آبان'; break;
-            case '9': $ret = 'آذر'; break;
-            case '10': $ret = 'دی'; break;
-            case '11': $ret = 'بهمن'; break;
-            case '12': $ret = 'اسفند'; break;
-        }
-        return ($shorten) ? mb_substr($ret, 0, $len, 'UTF-8') : $ret;
+        // Convert
+        $months = array(
+            'فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'
+        );
+        $ret    = $months[$month - 1];
+
+        // Return
+        return ($shorten) ? self::substr($ret, 0, $len) : $ret;
     }
 
+    /**
+     * Converts latin numbers to farsi script
+     */
     private static function convertNumbers($matches)
     {
-        $farsi_array = array("۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹");
-        $english_array = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+        $farsi_array   = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
+        $english_array = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+
         return str_replace($english_array, $farsi_array, $matches);
     }
 
+    /**
+     * Division
+     */
     private static function div($a, $b)
     {
         return (int) ($a / $b);
+    }
+
+    /**
+     * Substring helper
+     */
+    private static function substr($str, $start, $len)
+    {
+        if( function_exists('mb_substr') ){
+            return mb_substr($str, $start, $len, 'UTF-8');
+        }
+        else{
+            return substr($str, $start, $len * 2);
+        }
     }
 
     /**
