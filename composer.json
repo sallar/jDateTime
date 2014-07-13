@@ -2,13 +2,15 @@
     "name": "sallar/jdatetime",
     "type": "library",
     "description": "Jalali (Shamsi) DateTime class written in PHP, Supports year higher than 2038",
-    "keywords": ["date", "datetime", "jalali", "jalalidate", "jdatetime"],
+    "keywords": ["date", "datetime", "jalali", "jalalidate", "jdatetime","shamsi","iran","farsi","persian","time"],
     "homepage": "http://sallar.me/projects/jdatetime/",
     "license": "MIT",
     "authors": [
         {
             "name": "Sallar Kaboli",
-            "email": "sallar.kaboli@gmail.com"
+            "email": "sallar.kaboli@gmail.com",
+            "homepage": "http://sallar.me",
+            "role": "Developer"
         }
     ],
     "require": {
