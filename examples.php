@@ -3,7 +3,7 @@
 //Include
 require_once dirname(__FILE__) . '/jdatetime.class.php';
 
-//Just adding routine html tags and setting encoding to view Persian characters correctly.
+//Just add routine html tags and encoding the settings to view Persian characters correctly.
 echo "<html>";
 echo "<head>";
 echo "<meta charset='utf-8'>";
