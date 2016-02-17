@@ -21,5 +21,8 @@
             "jdatetime.class.php"
         ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "^5.2"
+    }
 }

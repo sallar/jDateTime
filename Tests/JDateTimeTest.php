@@ -28,4 +28,11 @@ class JDateTimeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->obj->date("c", $time, false, false, 'America/New_York'), "2010-01-01T00:00:00-05:00");
         $this->assertEquals($this->obj->date("c", $time, false, false, 'Europe/Berlin'), "2010-01-01T06:00:00+01:00");
     }
+
+    public function testConvertFormatToFormat()
+    {
+        $a = '2016-02-14 14:20:38';
+        $date = \jDateTime::convertFormatToFormat('Y-m-d H:i:s', 'Y-m-d H:i:s', $a, 'Asia/Tehran');
+        $this->assertEquals($date, '۱۳۹۴-۱۱-۲۵ ۱۴:۲۰:۳۸');
+    }
 }
