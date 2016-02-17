@@ -74,6 +74,38 @@ class jDateTime
     }
 
     /**
+     * Convert a formatted string from Georgian Calendar to Jalali Calendar.
+     * This will be useful to directly convert time strings coming from databases.
+     * Example:
+     *
+     *  // Suppose this comes from database
+     *  $a = '2016-02-14 14:20:38';
+     *  $date = \jDateTime::convertFormatToFormat('Y-m-d H:i:s', 'Y-m-d H:i:s', $a);
+     *  // $date will now be '۱۳۹۴-۱۱-۲۵ ۱۴:۲۰:۳۸'
+     *
+     * @author Vahid Fazlollahzade
+     * @param string $jalaliFormat Return format. Same as static::date(...)
+     * @param string $georgianFormat The format of $timeString. See php.net/date
+     * @param string $timeString The time itself, formatted as $georgianFormat
+     * @param null|\DateTimeZone|string $timezone The timezone. Same as static::date(...)
+     * @return string
+     */
+    public static function convertFormatToFormat($jalaliFormat, $georgianFormat, $timeString, $timezone=null)
+    {
+        // Normalize $timezone, take from static::date(...)
+        $timezone = ($timezone != null) ? $timezone : ((self::$timezone != null) ? self::$timezone : date_default_timezone_get());
+        if (is_string($timezone)) {
+            $timezone = new \DateTimeZone($timezone);
+        } elseif (!$timezone instanceof \DateTimeZone) {
+            throw new \RuntimeException('Provided timezone is not correct.');
+        }
+
+        // Convert to timestamp, then to Jalali
+        $datetime = \DateTime::createFromFormat($georgianFormat, $timeString, $timezone);
+        return static::date($jalaliFormat, $datetime->getTimestamp());
+    }
+
+    /**
      * jDateTime::Date
      *
      * Formats and returns given timestamp just like php's
