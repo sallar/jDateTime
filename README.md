@@ -57,15 +57,14 @@ Please see [examples.php](examples.php) and [example-static.php](examples-static
 ##License
 jDateTime was created by [Sallar Kaboli](http://sallar.me) and released under the [MIT License](http://opensource.org/licenses/mit-license.php).
 
-Copyright (C) 2015 [Sallar Kaboli](http://sallar.me)  
-Part of Phoenix Framework (p5x.org) by [Phoenix Alternatvie](http://p5x.org)
+Copyright (C) 2016 [Sallar Kaboli](http://sallar.me)  
   
 Original Jalali to Gregorian (and vice versa) convertor:  
 Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
 
     The MIT License (MIT)
     
-    Copyright (C) 2003-2015 Sallar Kaboli
+    Copyright (C) 2003-2016 Sallar Kaboli
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -87,11 +86,4 @@ Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
 
 #Resources
 - [List of supported timezones](http://www.php.net/manual/en/timezones.php)  
-- [Documentation and Instructions in Persian](http://sallar.me/projects/jdatetime)  
-- [Project page in phpclasses.org](http://www.phpclasses.org/jdatetime)   
-
-#Support This Project
-  
-[![Donate via Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R7Y6R3UZLUNP6)
-
-
+- [Documentation and Instructions in Persian](http://sallar.me/farsi/projects/jdatetime/)  
