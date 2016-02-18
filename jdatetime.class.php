@@ -442,6 +442,54 @@ class jDateTime
         //Return
         return $ret;
     }
+    
+    /**
+     * jDateTime::getdate
+     *
+     * Like php built-in function, returns an associative array containing the date information of a timestamp.
+     *
+     * @author Meysam Pour Ganji
+     * @param $timestamp int The timestamp that whould convert to date information array, if NULL passed, current timestamp will be processed.
+     * @return An associative array of information related to the timestamp. For see elements of the returned associative array see {@link http://php.net/manual/en/function.getdate.php#refsect1-function.getdate-returnvalues}.
+     */
+    public static function getdate( $timestamp = NULL )
+    {
+    	if( $timestamp === NULL )
+    	{
+    		$timestamp = time();
+    	}
+    	
+       	if( is_string($timestamp) )
+    	{
+    		if( ctype_digit($timestamp) || ( $timestamp{0} == '-' && ctype_digit(substr($timestamp, 1)) ) )
+    		{
+    			$timestamp = (int)$timestamp;
+    		}
+    		else
+    		{
+    			$timestamp = strtotime($timestamp);
+    		}
+    	}
+    	
+    	$dateString = self::date("s|i|G|j|w|n|Y|z|l|F", $timestamp);
+    	$dateArray = explode("|", $dateString);
+    	
+    	$result = array(
+    			"seconds" => $dateArray[0],
+    			"minutes" => $dateArray[1],
+    			"hours" => $dateArray[2],
+    			"mday" => $dateArray[3],
+    			"wday" => $dateArray[4],
+    			"mon" => $dateArray[5],
+    			"year" => $dateArray[6],
+    			"yday" => $dateArray[7],
+    			"weekday" => $dateArray[8],
+    			"month" => $dateArray[9],
+    			0 => $timestamp
+    		); 
+    	
+    	return $result;
+    }
 
     /**
      * System Helpers below
