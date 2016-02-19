@@ -12,8 +12,10 @@ echo "<body>";
 
 //Init
 $date = new jDateTime(true, true, 'Asia/Tehran');
-
 echo $date->date("l j F Y H:i"); // Outputs: پنجشنبه ۱۵ اردیبهشت ۱۳۹۰ ۰۰:۰۰
+echo "<br />\n";
+$date->setMonthNameType('falaki');// jalali or falaki
+echo $date->date("l j F Y H:i"); // Outputs: پنجشنبه ۱۵ ثور ۱۳۹۰ ۰۰:۰۰
 echo "<br />\n";
 echo $date->date("Y-m-d", false, false); // Outputs: 1390-02-15
 echo "<br />\n";
@@ -21,6 +23,7 @@ echo $date->date("Y-m-d", false, false, false); //Outputs: 2011-05-05
      //Or you could just use: $date->gDate("Y-m-d"); 
      //Same as above
 echo "<br />\n";
+$date->setMonthNameType('jalali');
 echo $date->date("l j F Y H:i T", false, null, null, 'America/New_York'); //چهارشنبه ۱۴ اردیبهشت ۱۳۹۰ ۱۵:۳۰ EDT
 
 echo "<br />\n";

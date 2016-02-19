@@ -51,6 +51,7 @@ class jDateTime
     private static $convert  = true; //Convert numbers to Farsi characters in utf-8
     private static $timezone = null; //Timezone String e.g Asia/Tehran, Defaults to Server Timezone Settings
     private static $temp = array();
+    private static $monthNameType = 'jalali'; //Use jalali ro falaki for month names
 
     /**
      * jDateTime::Constructor
@@ -68,9 +69,15 @@ class jDateTime
      */
     public function __construct($convert = null, $jalali = null, $timezone = null)
     {
-        if ( $jalali   !== null ) self::$jalali   = (bool) $jalali;
         if ( $convert  !== null ) self::$convert  = (bool) $convert;
+        if ( $jalali   !== null ) self::$jalali   = (bool) $jalali;
         if ( $timezone !== null ) self::$timezone = $timezone;
+    }
+
+    public static function setMonthNameType($type = 'jalali')
+    {
+        if(in_array($type, ['jalali', 'falaki']))
+            self::$monthNameType = $type;
     }
 
     /**
@@ -484,9 +491,10 @@ class jDateTime
     {
         // Convert
         $months = array(
-            'فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'
+            'jalali' => ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+            'falaki' => ['حمل', 'ثور', 'جوزا', 'سرطان', 'اسد', 'سنبله', 'میزان', 'عقرب', 'قوس', 'جدی', 'دلو', 'حوت']
         );
-        $ret    = $months[$month - 1];
+        $ret    = $months[self::$monthNameType][$month - 1];
 
         // Return
         return ($shorten) ? self::substr($ret, 0, $len) : $ret;

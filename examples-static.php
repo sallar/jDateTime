@@ -12,12 +12,14 @@ echo "<body>";
 
 date_default_timezone_set('Asia/Tehran');
 
+jDateTime::setMonthNameType('falaki');
 echo jDateTime::date('l j F Y H:i');
 echo "<br />";
 echo jDateTime::date('Y-m-d', false, false);
 echo "<br />";
 echo jDateTime::date('Y-m-d', false, false, false);
 echo "<br />";
+jDateTime::setMonthNameType('jalali');
 echo jDateTime::date("l j F Y H:i T", false, null, null, 'America/New_York');
 
 //Just adding routine html tags.
