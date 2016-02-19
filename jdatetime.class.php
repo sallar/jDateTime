@@ -51,7 +51,8 @@ class jDateTime
     private static $convert  = true; //Convert numbers to Farsi characters in utf-8
     private static $timezone = null; //Timezone String e.g Asia/Tehran, Defaults to Server Timezone Settings
     private static $temp = array();
-    private static $monthNameType = 'jalali'; //Use jalali ro falaki for month names
+    private static $monthNameTypes = array('jalali', 'falaki'); //Available month name types
+    private static $monthNameType = 'jalali'; //Default month name type
 
     /**
      * jDateTime::Constructor
@@ -84,7 +85,7 @@ class jDateTime
      */
     public static function setMonthNameType($type = 'jalali')
     {
-        if(in_array($type, ['jalali', 'falaki']))
+        if(in_array($type, self::$monthNameTypes))
             self::$monthNameType = $type;
     }
 
