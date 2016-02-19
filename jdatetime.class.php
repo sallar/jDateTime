@@ -74,6 +74,14 @@ class jDateTime
         if ( $timezone !== null ) self::$timezone = $timezone;
     }
 
+     /**
+     * jDateTime::setMonthNameType
+     *
+     * Pass jalali or falaki to change the month names
+     *
+     * @author Morteza Rajabi
+     * @param $type string Month name type
+     */
     public static function setMonthNameType($type = 'jalali')
     {
         if(in_array($type, ['jalali', 'falaki']))
