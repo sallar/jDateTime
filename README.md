@@ -1,3 +1,9 @@
+UNMAINTAINED
+===
+:warning: This package is deprecated and unmaintained. Please **DO NOT** use it in production unless it’s absolutely necessary and at your own risk. There are several other modern Shamsi/Jalali date packages out there like [this one](http://farhadi.ir/blog/1389/02/10/persian-calendar-for-php-53/) which you can use.
+
+:round_pushpin: If you happen to be a php developer and want to maintain this project, please give me a shout so I can give you write access to this project.
+
 #jDateTime
 
 PHP class to convert dates from Gregorian calendar system to Jalali calendar system and vice versa. Supports dates beyond 2038.  
