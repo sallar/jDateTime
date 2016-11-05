@@ -19,6 +19,8 @@ class JDateTimeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($time, 630361800);
         $this->assertEquals($this->obj->date("l Y/m/d", $time), "شنبه ۱۳۶۸/۱۰/۰۲");
         $this->assertEquals($this->obj->date("c", $time, false), "1368-10-02T00:00:00+03:30");
+        $time = $this->obj->mktime(NULL, NULL, NULL, 10, 14, 1395);
+        $this->assertEquals($time, 1483389000);
     }
 
     public function testMakeGregorianTime()
