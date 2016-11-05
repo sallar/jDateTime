@@ -133,144 +133,140 @@ class jDateTime
         if ( (self::$jalali === false && $jalali === null) || $jalali === false ) {
             return $obj->format($format);
         }
-        else {
-            
-            //Find what to replace
-            $chars  = (preg_match_all('/([a-zA-Z]{1})/', $format, $chars)) ? $chars[0] : array();
-            
-            //Intact Keys
-            $intact = array('B','h','H','g','G','i','s','I','U','u','Z','O','P');
-            $intact = self::filterArray($chars, $intact);
-            $intactValues = array();
 
-            foreach ($intact as $k => $v) {
-                $intactValues[$k] = $obj->format($v);
-            }
-            //End Intact Keys
+			//Find what to replace
+			$chars  = (preg_match_all('/([a-zA-Z]{1})/', $format, $chars)) ? $chars[0] : array();
+			
+			//Intact Keys
+			$intact = array('B','h','H','g','G','i','s','I','U','u','Z','O','P');
+			$intact = self::filterArray($chars, $intact);
+			$intactValues = array();
+
+			foreach ($intact as $k => $v) {
+				 $intactValues[$k] = $obj->format($v);
+			}
+			//End Intact Keys
 
 
-            //Changed Keys
-            list($year, $month, $day) = array($obj->format('Y'), $obj->format('n'), $obj->format('j'));
-            list($jyear, $jmonth, $jday) = self::toJalali($year, $month, $day);
+			//Changed Keys
+			list($year, $month, $day) = array($obj->format('Y'), $obj->format('n'), $obj->format('j'));
+			list($jyear, $jmonth, $jday) = self::toJalali($year, $month, $day);
 
-            $keys   = array('d','D','j','l','N','S','w','z','W','F','m','M','n','t','L','o','Y','y','a','A','c','r','e','T');
-            $keys   = self::filterArray($chars, $keys, array('z'));
-            $values = array();
+			$keys   = array('d','D','j','l','N','S','w','z','W','F','m','M','n','t','L','o','Y','y','a','A','c','r','e','T');
+			$keys   = self::filterArray($chars, $keys, array('z'));
+			$values = array();
 
-            foreach ($keys as $k => $key) {
+			foreach ($keys as $k => $key) {
 
-                $v = '';
-                switch ($key) {
-                    //Day
-                    case 'd':
-                        $v = sprintf('%02d', $jday);
-                        break;
-                    case 'D':
-                        $v = self::getDayNames($obj->format('D'), true);
-                        break;
-                    case 'j':
-                        $v = $jday;
-                        break;
-                    case 'l':
-                        $v = self::getDayNames($obj->format('l'));
-                        break;
-                    case 'N':
-                        $v = self::getDayNames($obj->format('l'), false, 1, true);
-                        break;
-                    case 'S':
-                        $v = 'ام';
-                        break;
-                    case 'w':
-                        $v = self::getDayNames($obj->format('l'), false, 1, true) - 1;
-                        break;
-                    case 'z':
-                        if ($jmonth > 6) {
-                            $v = 186 + (($jmonth - 6 - 1) * 30) + $jday;
-                        }
-                        else {
-                            $v = (($jmonth - 1) * 31) + $jday;
-                        }
-                        self::$temp['z'] = $v;
-                        break;
-                    //Week
-                    case 'W':
-                        $v = is_int(self::$temp['z'] / 7) ? (self::$temp['z'] / 7) : intval(self::$temp['z'] / 7 + 1);
-                        break;
-                    //Month
-                    case 'F':
-                        $v = self::getMonthNames($jmonth);
-                        break;
-                    case 'm':
-                        $v = sprintf('%02d', $jmonth);
-                        break;
-                    case 'M':
-                        $v = self::getMonthNames($jmonth, true);
-                        break;
-                    case 'n':
-                        $v = $jmonth;
-                        break;
-                    case 't':
-                    	if ($jmonth>=1 && $jmonth<=6) $v=31;
-                    	else if ($jmonth>=7 && $jmonth<=11) $v=30;
-                    	else if($jmonth==12 && $jyear % 4 ==3) $v=30;
-                    	else if ($jmonth==12 && $jyear % 4 !=3) $v=29;
-                        break;
-                    //Year
-                    case 'L':
-                        $tmpObj = new DateTime('@'.(time()-31536000));
-                        $v = $tmpObj->format('L');
-                        break;
-                    case 'o':
-                    case 'Y':
-                        $v = $jyear;
-                        break;
-                    case 'y':
-                        $v = $jyear % 100;
-                        break;
-                    //Time
-                    case 'a':
-                        $v = ($obj->format('a') == 'am') ? 'ق.ظ' : 'ب.ظ';
-                        break;
-                    case 'A':
-                        $v = ($obj->format('A') == 'AM') ? 'قبل از ظهر' : 'بعد از ظهر';
-                        break;
-                    //Full Dates
-                    case 'c':
-                        $v  = $jyear.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $jday).'T';
-                        $v .= $obj->format('H').':'.$obj->format('i').':'.$obj->format('s').$obj->format('P');
-                        break;
-                    case 'r':
-                        $v  = self::getDayNames($obj->format('D'), true).', '.sprintf('%02d', $jday).' '.self::getMonthNames($jmonth, true);
-                        $v .= ' '.$jyear.' '.$obj->format('H').':'.$obj->format('i').':'.$obj->format('s').' '.$obj->format('P');
-                        break;
-                    //Timezone
-                    case 'e':
-                        $v = $obj->format('e');
-                        break;
-                    case 'T':
-                        $v = $obj->format('T');
-                        break;
+				 $v = '';
+				 switch ($key) {
+					  //Day
+					  case 'd':
+							$v = sprintf('%02d', $jday);
+							break;
+					  case 'D':
+							$v = self::getDayNames($obj->format('D'), true);
+							break;
+					  case 'j':
+							$v = $jday;
+							break;
+					  case 'l':
+							$v = self::getDayNames($obj->format('l'));
+							break;
+					  case 'N':
+							$v = self::getDayNames($obj->format('l'), false, 1, true);
+							break;
+					  case 'S':
+							$v = 'ام';
+							break;
+					  case 'w':
+							$v = self::getDayNames($obj->format('l'), false, 1, true) - 1;
+							break;
+					  case 'z':
+							if ($jmonth > 6) {
+								 $v = 186 + (($jmonth - 6 - 1) * 30) + $jday;
+							}
+							else {
+								 $v = (($jmonth - 1) * 31) + $jday;
+							}
+							self::$temp['z'] = $v;
+							break;
+					  //Week
+					  case 'W':
+							$v = is_int(self::$temp['z'] / 7) ? (self::$temp['z'] / 7) : intval(self::$temp['z'] / 7 + 1);
+							break;
+					  //Month
+					  case 'F':
+							$v = self::getMonthNames($jmonth);
+							break;
+					  case 'm':
+							$v = sprintf('%02d', $jmonth);
+							break;
+					  case 'M':
+							$v = self::getMonthNames($jmonth, true);
+							break;
+					  case 'n':
+							$v = $jmonth;
+							break;
+					  case 't':
+						if ($jmonth>=1 && $jmonth<=6) $v=31;
+						else if ($jmonth>=7 && $jmonth<=11) $v=30;
+						else if($jmonth==12 && $jyear % 4 ==3) $v=30;
+						else if ($jmonth==12 && $jyear % 4 !=3) $v=29;
+							break;
+					  //Year
+					  case 'L':
+							$tmpObj = new DateTime('@'.(time()-31536000));
+							$v = $tmpObj->format('L');
+							break;
+					  case 'o':
+					  case 'Y':
+							$v = $jyear;
+							break;
+					  case 'y':
+							$v = $jyear % 100;
+							break;
+					  //Time
+					  case 'a':
+							$v = ($obj->format('a') == 'am') ? 'ق.ظ' : 'ب.ظ';
+							break;
+					  case 'A':
+							$v = ($obj->format('A') == 'AM') ? 'قبل از ظهر' : 'بعد از ظهر';
+							break;
+					  //Full Dates
+					  case 'c':
+							$v  = $jyear.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $jday).'T';
+							$v .= $obj->format('H').':'.$obj->format('i').':'.$obj->format('s').$obj->format('P');
+							break;
+					  case 'r':
+							$v  = self::getDayNames($obj->format('D'), true).', '.sprintf('%02d', $jday).' '.self::getMonthNames($jmonth, true);
+							$v .= ' '.$jyear.' '.$obj->format('H').':'.$obj->format('i').':'.$obj->format('s').' '.$obj->format('P');
+							break;
+					  //Timezone
+					  case 'e':
+							$v = $obj->format('e');
+							break;
+					  case 'T':
+							$v = $obj->format('T');
+							break;
 
-                }
-                $values[$k] = $v;
+				 }
+				 $values[$k] = $v;
 
-            }
-            //End Changed Keys
+			}
+			//End Changed Keys
 
-            //Merge
-            $keys   = array_merge($intact, $keys);
-            $values = array_merge($intactValues, $values);
+			//Merge
+			$keys   = array_merge($intact, $keys);
+			$values = array_merge($intactValues, $values);
 
-            //Return
-            $ret = strtr($format, array_combine($keys, $values));
-            return
-                ($convert === false ||
-                ($convert === null && self::$convert === false) ||
-                ( $jalali === false || $jalali === null && self::$jalali === false ))
-                ? $ret : self::convertNumbers($ret);
-
-        }
-
+			//Return
+			$ret = strtr($format, array_combine($keys, $values));
+			return
+				 ($convert === false ||
+				 ($convert === null && self::$convert === false) ||
+				 ( $jalali === false || $jalali === null && self::$jalali === false ))
+				 ? $ret : self::convertNumbers($ret);
     }
 
     /**
@@ -570,9 +566,8 @@ class jDateTime
         if( function_exists('mb_substr') ){
             return mb_substr($str, $start, $len, 'UTF-8');
         }
-        else{
-            return substr($str, $start, $len * 2);
-        }
+
+        return substr($str, $start, $len * 2);
     }
 
     /**
