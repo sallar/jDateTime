@@ -373,6 +373,9 @@ class jDateTime
         $month = (intval($month) == 0) ? self::date('m') : $month;
         $day   = (intval($day)   == 0) ? self::date('d') : $day;
         $year  = (intval($year)  == 0) ? self::date('Y') : $year;
+        $hour  = intval($hour);
+        $minute  = intval($minute);
+        $second  = intval($second);
 
         //Convert to Gregorian if necessary
         if ( $jalali === true || ($jalali === null && self::$jalali === true) ) {
