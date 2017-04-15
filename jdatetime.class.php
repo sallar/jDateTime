@@ -66,11 +66,11 @@ class jDateTime
      * @param $jalali bool Converts date to Jalali
      * @param $timezone string Timezone string
      */
-    public function __construct($convert = null, $jalali = null, $timezone = null)
+    public function __construct($convert = false, $jalali = false, $timezone = null)
     {
-        if ( $jalali   !== null ) self::$jalali   = (bool) $jalali;
-        if ( $convert  !== null ) self::$convert  = (bool) $convert;
-        if ( $timezone !== null ) self::$timezone = $timezone;
+        if ($jalali)   self::$jalali   = (bool) $jalali;
+        if ($convert)  self::$convert  = (bool) $convert;
+        if ($timezone) self::$timezone = $timezone;
     }
 
     /**
@@ -122,15 +122,15 @@ class jDateTime
      * @param $timezone string (Optional) forces a different timezone. pass null to use system default
      * @return string Formatted input
      */
-    public static function date($format, $stamp = false, $convert = null, $jalali = null, $timezone = null)
+    public static function date($format, $stamp = null, $convert = false, $jalali = false, $timezone = null)
     {
         //Timestamp + Timezone
-        $stamp    = ($stamp !== false) ? $stamp : time();
+        $stamp    = ($stamp) ? $stamp : time();
         $timezone = ($timezone != null) ? $timezone : ((self::$timezone != null) ? self::$timezone : date_default_timezone_get());
         $obj      = new DateTime('@' . $stamp, new DateTimeZone($timezone));
         $obj->setTimezone(new DateTimeZone($timezone));
 
-        if ( (self::$jalali === false && $jalali === null) || $jalali === false ) {
+        if (self::$jalali || !$jalali) {
             return $obj->format($format);
         }
         else {
@@ -264,10 +264,7 @@ class jDateTime
             //Return
             $ret = strtr($format, array_combine($keys, $values));
             return
-                ($convert === false ||
-                ($convert === null && self::$convert === false) ||
-                ( $jalali === false || $jalali === null && self::$jalali === false ))
-                ? $ret : self::convertNumbers($ret);
+              (!$convert || (!$convert && !self::$convert) || (!$jalali || !$jalali && !self::$jalali)) ? $ret : self::convertNumbers($ret);
 
         }
 
@@ -291,7 +288,7 @@ class jDateTime
      * @param $timezone string (Optional) forces a different timezone. pass null to use system default
      * @return string Formatted input
      */
-    public static function gDate($format, $stamp = false, $timezone = null)
+    public static function gDate($format, $stamp = null, $timezone = null)
     {
         return self::date($format, $stamp, false, false, $timezone);
     }
@@ -313,7 +310,7 @@ class jDateTime
      * @param $timezone string (Optional) forces a different timezone. pass null to use system default
      * @return string Formatted input
      */
-    public static function strftime($format, $stamp = false, $convert = null, $jalali = null, $timezone = null)
+    public static function strftime($format, $stamp = null, $convert = false, $jalali = false, $timezone = null)
     {
         $str_format_code = array(
             '%a', '%A', '%d', '%e', '%j', '%u', '%w',
@@ -367,7 +364,7 @@ class jDateTime
      * @param $timezone string (Optional) acceps an optional timezone if you want one
      * @return int Unix Timestamp (Epoch Time)
      */
-    public static function mktime($hour, $minute, $second, $month, $day, $year, $jalali = null, $timezone = null)
+    public static function mktime($hour, $minute, $second, $month, $day, $year, $jalali = false, $timezone = null)
     {
         //Defaults
         $month = (intval($month) == 0) ? self::date('m') : $month;
@@ -378,14 +375,14 @@ class jDateTime
         $second  = intval($second);
 
         //Convert to Gregorian if necessary
-        if ( $jalali === true || ($jalali === null && self::$jalali === true) ) {
+        if ($jalali || (!$jalali && self::$jalali)) {
             list($year, $month, $day) = self::toGregorian($year, $month, $day);
         }
 
         //Create a new object and set the timezone if available
         $date = $year.'-'.sprintf('%02d', $month).'-'.sprintf('%02d', $day).' '.$hour.':'.$minute.':'.$second;
 
-        if ( self::$timezone != null || $timezone != null ) {
+        if (self::$timezone != null || $timezone != null) {
             $obj = new DateTime($date, new DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
         }
         else {
@@ -418,7 +415,7 @@ class jDateTime
      * @param $jalali bool (Optional) pass false if you want to input gregorian time
      * @return bool
      */
-    public static function checkdate($month, $day, $year, $jalali = null)
+    public static function checkdate($month, $day, $year, $jalali = false)
     {
         //Defaults
         $month = (intval($month) == 0) ? self::date('n') : intval($month);
@@ -426,14 +423,14 @@ class jDateTime
         $year  = (intval($year)  == 0) ? self::date('Y') : intval($year);
         
         //Check if its jalali date
-        if ( $jalali === true || ($jalali === null && self::$jalali === true) )
+        if ($jalali || (!$jalali && self::$jalali))
         {
             $epoch = self::mktime(0, 0, 0, $month, $day, $year);
             
-            if( self::date('Y-n-j', $epoch,false) == "$year-$month-$day" ) {
+            if(self::date('Y-n-j', $epoch,false) == $year.'-'.$month.'-'.$day) {
                 $ret = true;
             }
-            else{
+            else {
                 $ret = false; 
             }
         }
