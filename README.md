@@ -7,7 +7,8 @@ UNMAINTAINED
 # jDateTime
 
 PHP class to convert dates from Gregorian calendar system to Jalali calendar system and vice versa. Supports dates beyond 2038.  
-Jalali, also known as Shamsi or Hijri Shamsi is the Iranian calendar system.  
+Jalali, also known as Shamsi or Hijri Shamsi is the Iranian calendar system. 
+It is also support Falaki month names. 
 [![Build Status](https://travis-ci.org/sallar/jDateTime.png?branch=master)](https://travis-ci.org/sallar/jDateTime)
 
 # About v2.2.0
@@ -59,6 +60,7 @@ Please see [examples.php](examples.php) and [example-static.php](examples-static
 - [Afshin Mehrabani](http://afshinm.name)  
 - [Amir Latifi](http://amiir.me)
 - [Ruhollah Namjoo](https://github.com/namjoo)
+- [Morteza Rajabi](https://github.com/mortezarajabi)
 
 ## License
 jDateTime was created by [Sallar Kaboli](http://sallar.me) and released under the [MIT License](http://opensource.org/licenses/mit-license.php).
